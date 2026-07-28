@@ -372,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     return {
       whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
-      x: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      x: `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
       facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
     };
   }
