@@ -366,14 +366,26 @@ document.addEventListener("DOMContentLoaded", () => {
   // Build share links for social platforms
   function buildShareLinks(activityName, formattedSchedule) {
     const pageUrl = window.location.href;
-    const shareText = `Join me for ${activityName} at Mergington High School! ${formattedSchedule}`;
-    const encodedText = encodeURIComponent(shareText);
-    const encodedUrl = encodeURIComponent(pageUrl);
+    const safeActivityName = String(activityName).replace(/\s+/g, " ").trim();
+    const safeSchedule = String(formattedSchedule).replace(/\s+/g, " ").trim();
+    const shareText = `Join me for ${safeActivityName} at Mergington High School! ${safeSchedule}`;
+
+    const whatsappParams = new URLSearchParams({
+      text: `${shareText} ${pageUrl}`,
+    });
+    const xParams = new URLSearchParams({
+      text: shareText,
+      url: pageUrl,
+    });
+    const facebookParams = new URLSearchParams({
+      u: pageUrl,
+      quote: shareText,
+    });
 
     return {
-      whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
-      x: `https://x.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
-      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
+      whatsapp: `https://wa.me/?${whatsappParams.toString()}`,
+      x: `https://x.com/intent/tweet?${xParams.toString()}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?${facebookParams.toString()}`,
     };
   }
 
