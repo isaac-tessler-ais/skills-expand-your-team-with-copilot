@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateAuthBodyClass();
   }
 
-  function updateThemeToggleButton(isDarkMode) {
+  function setThemeToggleState(isDarkMode) {
     themeToggleIcon.textContent = isDarkMode ? "☀️" : "🌙";
     themeToggleLabel.textContent = isDarkMode ? "Light Mode" : "Dark Mode";
     themeToggleButton.setAttribute(
@@ -131,12 +131,13 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function applyTheme(theme, savePreference = true) {
-    const isDarkMode = theme === "dark";
+    const normalizedTheme = theme === "dark" ? "dark" : "light";
+    const isDarkMode = normalizedTheme === "dark";
     document.body.classList.toggle("dark-theme", isDarkMode);
-    updateThemeToggleButton(isDarkMode);
+    setThemeToggleState(isDarkMode);
 
     if (savePreference) {
-      localStorage.setItem(THEME_PREFERENCE_KEY, isDarkMode ? "dark" : "light");
+      localStorage.setItem(THEME_PREFERENCE_KEY, normalizedTheme);
     }
   }
 
