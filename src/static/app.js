@@ -363,6 +363,20 @@ document.addEventListener("DOMContentLoaded", () => {
     return "academic";
   }
 
+  // Build share links for social platforms
+  function buildShareLinks(activityName, formattedSchedule) {
+    const pageUrl = window.location.href;
+    const shareText = `Join me for ${activityName} at Mergington High School! ${formattedSchedule}`;
+    const encodedText = encodeURIComponent(shareText);
+    const encodedUrl = encodeURIComponent(pageUrl);
+
+    return {
+      whatsapp: `https://wa.me/?text=${encodedText}%20${encodedUrl}`,
+      x: `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedText}`,
+    };
+  }
+
   // Function to fetch activities from API with optional day and time filters
   async function fetchActivities() {
     // Show loading skeletons first
@@ -498,6 +512,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Format the schedule using the new helper function
     const formattedSchedule = formatSchedule(details);
+    const shareLinks = buildShareLinks(name, formattedSchedule);
 
     // Create activity tag
     const tagHtml = `
@@ -568,6 +583,11 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         `
         }
+        <div class="share-buttons">
+          <a class="share-button" href="${shareLinks.whatsapp}" target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
+          <a class="share-button" href="${shareLinks.x}" target="_blank" rel="noopener noreferrer">Share on X</a>
+          <a class="share-button" href="${shareLinks.facebook}" target="_blank" rel="noopener noreferrer">Share on Facebook</a>
+        </div>
       </div>
     `;
 
