@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     technology: { label: "Technology", color: "#e8eaf6", textColor: "#3949ab" },
   };
 
+  const schoolName = "Mergington High School";
+
   // State for activities and filters
   let allActivities = {};
   let currentFilter = "all";
@@ -368,7 +370,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const pageUrl = window.location.href;
     const safeActivityName = String(activityName).replace(/\s+/g, " ").trim();
     const safeSchedule = String(formattedSchedule).replace(/\s+/g, " ").trim();
-    const shareText = `Check out ${safeActivityName} at Mergington High School. ${safeSchedule}`;
+    const shareText = `Check out ${safeActivityName} at ${schoolName}. ${safeSchedule}`;
 
     const whatsappParams = new URLSearchParams({
       text: `${shareText} ${pageUrl}`,
@@ -596,9 +598,9 @@ document.addEventListener("DOMContentLoaded", () => {
         `
         }
         <div class="share-buttons">
-          <a class="share-button" href="${shareLinks.whatsapp}" target="_blank" rel="noopener noreferrer">Share on WhatsApp</a>
-          <a class="share-button" href="${shareLinks.x}" target="_blank" rel="noopener noreferrer">Share on X</a>
-          <a class="share-button" href="${shareLinks.facebook}" target="_blank" rel="noopener noreferrer">Share on Facebook</a>
+          <a class="share-button" href="${shareLinks.whatsapp}" target="_blank" rel="noopener noreferrer" aria-label="Share ${name} on WhatsApp">Share on WhatsApp</a>
+          <a class="share-button" href="${shareLinks.x}" target="_blank" rel="noopener noreferrer" aria-label="Share ${name} on X">Share on X</a>
+          <a class="share-button" href="${shareLinks.facebook}" target="_blank" rel="noopener noreferrer" aria-label="Share ${name} on Facebook">Share on Facebook</a>
         </div>
       </div>
     `;
