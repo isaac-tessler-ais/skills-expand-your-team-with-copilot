@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Authentication state
   let currentUser = null;
-  const themePreferenceKey = "preferredTheme";
+  const THEME_PREFERENCE_KEY = "preferredTheme";
 
   // Time range mappings for the dropdown
   const timeRanges = {
@@ -136,13 +136,14 @@ document.addEventListener("DOMContentLoaded", () => {
     updateThemeToggleButton(isDarkMode);
 
     if (savePreference) {
-      localStorage.setItem(themePreferenceKey, isDarkMode ? "dark" : "light");
+      localStorage.setItem(THEME_PREFERENCE_KEY, isDarkMode ? "dark" : "light");
     }
   }
 
   function initializeTheme() {
-    const savedTheme = localStorage.getItem(themePreferenceKey);
-    const theme = savedTheme === "dark" ? "dark" : "light";
+    const savedTheme = localStorage.getItem(THEME_PREFERENCE_KEY);
+    const theme =
+      savedTheme === "dark" || savedTheme === "light" ? savedTheme : "light";
     applyTheme(theme, false);
   }
 
